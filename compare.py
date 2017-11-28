@@ -52,7 +52,9 @@ def compare(base,latest):
 		change_line = 0
 		new_line = 0
 		file_name = os.path.basename(base_file_path)
-		latest_file_path = os.path.join(latest,file_name)
+
+		#latest_file_path = os.path.join(latest,file_name)
+		latest_file_path = os.path.join(os.path.dirname(base_file_path).replace('base','latest'), file_name)
 
 		print("{0}.{1}".format(i,base_file_path))
 		err =''
