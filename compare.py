@@ -146,12 +146,16 @@ if __name__ == '__main__':
 	'''
 	
 	index = 0
+	all_total_line = 0
 	for item in re:
 		s = ''
 		index +=1
 		s = "%-5s"%(str(index)) + " %-25s"%(item.FILE_NAME) + " %-12s"%(item.TOTAL_LINES) + \
 		" %-12s"%(item.CHANGE_LINES) + " %-12s"%(item.NEW_LINES) 
 		printl(s)
+		all_total_line += int(item.TOTAL_LINES)
+
+
 		'''
 		print "%-5s"%(str(index)),
 		print "%-25s"%(item.FILE_NAME),
@@ -170,5 +174,8 @@ if __name__ == '__main__':
 			f.write(str(i)+' '+item[0] + ' ' + item[1] + ' ' + item[2] + ' ' + str(item[3]))
 			f.write('\n')
 	'''
+
+	printl("All the files sumed total lines = %d"%all_total_line)
+	print("'Please also see the result.txt to copy the data.'")
 
 	a = input()
