@@ -1,0 +1,9 @@
+
+Summary
+INDEX FILE_NAME                TOTAL_LINES CHANGE_LINES NEW_LINES  
+1     aa1.txt                   5            2            4           
+2     ccdc_ssm.chh              5            0            0           
+3     ccdc_ssm.mpch             29586        0            0           
+4     cc_data_collector.mpch    21190        0            0           
+5     cc_results_hdlr.mpch      20650        0            0           
+6     central_alerter.chh       50           0            0           

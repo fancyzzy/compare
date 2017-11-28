@@ -4,6 +4,9 @@
 import os
 import subprocess
 import re
+import collections
+
+EACH_ITEM = collections.namedtuple('EACH_ITEM','FILE_NAME TOTAL_LINES CHANGE_LINES NEW_LINES')
 
 def get_file_list(dir,file_list):
 	'''
@@ -38,21 +41,25 @@ def compare(base,latest):
 	base_files = []
 
 	get_file_list(base,base_files)
-	print "DEBUG base_files=",base_files
 
 	result = []
 	i = 0	
-	for file in base_files:
-		#print "DEBUG basename = ",os.path.basename(file)
+	for base_file_path in base_files:
 		i += 1
-		each_result = []
-		del_cha_number = 0
+		#each_result = []
+		#each_result = EACH_ITEM(file_name, total_line, change_line, new_line)
 		total_line = 0
-		each_result.append(os.path.basename(file))
-		print "{0}.{1}".format(i,file)
+		change_line = 0
+		new_line = 0
+		file_name = os.path.basename(base_file_path)
+		latest_file_path = os.path.join(latest,file_name)
+
+		print "{0}.{1}".format(i,base_file_path)
 		err =''
 
-		lines_cmd = ['wc','-l',os.path.join(base,file)]
+		#count only non whitespace lines
+		#lines_cmd = ['wc','-l',base_file_path]
+		lines_cmd = ['grep','-c','-P',"'\S'",base_file_path]
 		p2 = subprocess.Popen(lines_cmd,stdin=subprocess.PIPE, stdout=subprocess.PIPE,\
 		stderr=subprocess.PIPE, shell=False)
 		p2.wait()
@@ -62,10 +69,11 @@ def compare(base,latest):
 			continue
 		else:
 			total_line = p2.stdout.read().strip().split(' ')[0]
-			each_result.append(total_line)
+			#each_result.append(total_line)
 			#print "finished total line = ",total_line
 
-		cmd = ['diff','-B',os.path.join(base,file),os.path.join(latest,file)]
+
+		cmd = ['diff','-B',base_file_path,latest_file_path]
 		p1 = subprocess.Popen(cmd,stdin=subprocess.PIPE, stdout=subprocess.PIPE,\
 		stderr=subprocess.PIPE, shell=False)
 
@@ -76,13 +84,13 @@ def compare(base,latest):
 			continue
 		else:
 			#out = p1.stdout.readline(100)
-			del_cha_number = str(out.count('<'))
-			each_result.append(del_cha_number)
-			#print "change counting finshed:",del_cha_number
+			change_line = str(out.count('<'))
+			#each_result.append(change_line)
+			#print "change counting finshed:",change_line
 			#feature1: newlines counting begin
 			rule = r'^\d+a\d+,?[\d]*'
 			comp = re.compile(rule)
-			add_number = 0
+			new_line = 0
 			for line in out.split('\n'):
 				res = comp.findall(line)
 				if len(res) == 1:
@@ -90,18 +98,27 @@ def compare(base,latest):
 					if len(r) == 2:
 						rr = r[1].split(',')
 						if len(rr) == 2:
-							add_number += int(rr[1])-int(rr[0])+1
+							new_line += int(rr[1])-int(rr[0])+1
 						elif len(rr) == 1:
-							add_number += 1
+							new_line += 1
 						else:
 							pass
-			each_result.append(add_number)
+			#each_result.append(new_line)
 			#feature1: newlines counting end
 
+		each_result = EACH_ITEM(file_name, total_line, change_line, new_line)
 		result.append(each_result)	
 		print "finished"
 		
 	return result
+
+def printl(s,result='result.txt'):
+	with open(result,'a') as f:
+		print s
+		f.write(s)
+		f.write('\n')
+
+
 if __name__ == '__main__':
 
 	base = os.path.join(os.getcwd(),'base')
@@ -109,24 +126,38 @@ if __name__ == '__main__':
 	
 	re = compare(base,latest)
 
+	printl("")
+	s = "Summary"
+	printl(s)
+	s = "%-5s"%("INDEX") + "%-25s"%(" FILE_NAME") + "%-12s"%(" TOTAL_LINES") + "%-12s"%(" CHANGE_LINES")\
+	+ "%-12s"%(" NEW_LINES")
+	printl(s)
+
+	'''
 	print "Summary"
 	print "%-5s"%("INDEX"),
 	print "%-25s"%("FILE_NAME"),
-	print "%-12s"%("TOTAL_LINE"),
-	print "%-12s"%("CHANGES"),
+	print "%-12s"%("TOTAL_LINES"),
+	print "%-12s"%("CHANGE_LINES"),
 	print "%-12s"%("NEW_LINES")
-
+	'''
 	
 	index = 0
 	for item in re:
+		s = ''
 		index +=1
+		s = "%-5s"%(str(index)) + " %-25s"%(item.FILE_NAME) + " %-12s"%(item.TOTAL_LINES) + \
+		" %-12s"%(item.CHANGE_LINES) + " %-12s"%(item.NEW_LINES) 
+		printl(s)
+		'''
 		print "%-5s"%(str(index)),
-		print "%-25s"%(item[0]),
-		print "%-12s"%(item[1]),
-		print "%-12s"%(item[2]),
-		print "%-12s"%(item[3])
+		print "%-25s"%(item.FILE_NAME),
+		print "%-12s"%(item.TOTAL_LINES),
+		print "%-12s"%(item.CHANGE_LINES),
+		print "%-12s"%(item.NEW_LINES)
+		'''
 
-
+	'''
 	i = 0
 	with open('result','w') as f:
 
@@ -135,6 +166,7 @@ if __name__ == '__main__':
 			i+= 1
 			f.write(str(i)+' '+item[0] + ' ' + item[1] + ' ' + item[2] + ' ' + str(item[3]))
 			f.write('\n')
+	'''
 
 
 	wa = raw_input()
