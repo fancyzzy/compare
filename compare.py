@@ -54,7 +54,7 @@ def compare(base,latest):
 		file_name = os.path.basename(base_file_path)
 		latest_file_path = os.path.join(latest,file_name)
 
-		print "{0}.{1}".format(i,base_file_path)
+		print("{0}.{1}".format(i,base_file_path))
 		err =''
 
 		#count only non whitespace lines
@@ -63,12 +63,14 @@ def compare(base,latest):
 		p2 = subprocess.Popen(lines_cmd,stdin=subprocess.PIPE, stdout=subprocess.PIPE,\
 		stderr=subprocess.PIPE, shell=False)
 		p2.wait()
+		out = p2.stdout.read()
 		err = p2.stderr.read()
-		if err != '':
-			print "error encounted!"
+		if err != '' and err != b'':
+			print("p2 error encounted: ",err)
 			continue
 		else:
-			total_line = p2.stdout.read().strip().split(' ')[0]
+			#total_line = str(p2.stdout.read()).strip().split(' ')[0]
+			total_line = out.decode('utf-8').strip().strip('\n').split(' ')[0]
 			#each_result.append(total_line)
 			#print "finished total line = ",total_line
 
@@ -78,9 +80,10 @@ def compare(base,latest):
 		stderr=subprocess.PIPE, shell=False)
 
 		out,err = p1.communicate('')
+		out  = str(out)
 
-		if err != '':
-			print "error encounted!"
+		if err != '' and err != b'':
+			print("p1 error encounted:",err)
 			continue
 		else:
 			#out = p1.stdout.readline(100)
@@ -108,13 +111,13 @@ def compare(base,latest):
 
 		each_result = EACH_ITEM(file_name, total_line, change_line, new_line)
 		result.append(each_result)	
-		print "finished"
+		print("finished")
 		
 	return result
 
 def printl(s,result='result.txt'):
 	with open(result,'a') as f:
-		print s
+		print(s)
 		f.write(s)
 		f.write('\n')
 
@@ -168,5 +171,4 @@ if __name__ == '__main__':
 			f.write('\n')
 	'''
 
-
-	wa = raw_input()
+	a = input()
