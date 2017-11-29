@@ -15,7 +15,7 @@ MY_COLOR_GREEN = '#%02x%02x%02x' % (192,233,17)
 class DirList(object):
 	def __init__(self, initdir=None):
 		self.top = Tk()
-		self.top.geometry('500x550+200+180')
+		self.top.geometry('500x520+200+180')
 		self.top.wm_title("VC2.0")
 
 		Label(self.top, text='').pack()
@@ -24,7 +24,7 @@ class DirList(object):
 			font = ('Helvetica', 16, 'bold'), fg =MY_COLOR_BLUE_OFFICE)
 		self.label_title.pack()
 		fm_title.pack()
-		#self.top.iconbitmap(icon_path)
+		self.top.iconbitmap('vc.ico')
 
 		fm_listbox = Frame(self.top)
 
