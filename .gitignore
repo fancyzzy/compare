@@ -2,3 +2,8 @@
 base/aa1.txt
 base/*
 latest/*
+*.pyc
+*.txt
+*.txt
+*.txt
+result.txt
