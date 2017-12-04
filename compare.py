@@ -48,7 +48,7 @@ def compare_single(base_file_path, latest_file_path):
 	p2.wait()
 	out = p2.stdout.read()
 	err = p2.stderr.read()
-	if err != '' and err != b'':
+	if err != '' and not err.startswith('cygwin warning') and err != b'':
 		print("p2 error encounted: ",err)
 	else:
 		total_line = out.decode('utf-8').strip().strip('\n').split(' ')[0]
@@ -58,7 +58,7 @@ def compare_single(base_file_path, latest_file_path):
 	stderr=subprocess.PIPE, shell=False)
 	out,err = p1.communicate('')
 	out  = str(out)
-	if err != '' and err != b'':
+	if err != '' and not err.startswith('cygwin warning') and err != b'':
 		print("p1 error encounted:",err)
 	else:
 		change_line = str(out.count('<'))

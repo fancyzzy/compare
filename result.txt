@@ -1,9 +1,186 @@
 
 Summary
 INDEX FILE_NAME                TOTAL_LINES CHANGE_LINES NEW_LINES  
+1     aa1.txt                   5            2            0           
+2     ccdc_ssm.chh              5            0            0           
+3     ccdc_ssm.mpch             29586        0            0           
+4     cc_data_collector.mpch    21190        0            0           
+5     cc_results_hdlr.mpch      20650        0            0           
+6     central_alerter.chh       50           0            0           
+
+Summary
+INDEX FILE_NAME                TOTAL_LINES CHANGE_LINES NEW_LINES  
 1     aa1.txt                   5            2            4           
 2     ccdc_ssm.chh              5            0            0           
 3     ccdc_ssm.mpch             29586        0            0           
 4     cc_data_collector.mpch    21190        0            0           
 5     cc_results_hdlr.mpch      20650        0            0           
 6     central_alerter.chh       50           0            0           
+
+Summary
+INDEX FILE_NAME                TOTAL_LINES CHANGE_LINES NEW_LINES  
+1     aa1.txt                   5            2            4           
+2     ccdc_ssm.chh              5            0            0           
+3     ccdc_ssm.mpch             29586        0            0           
+4     cc_data_collector.mpch    21190        0            0           
+5     cc_results_hdlr.mpch      20650        0            0           
+6     central_alerter.chh       50           0            0           
+
+Summary
+INDEX FILE_NAME                TOTAL_LINES CHANGE_LINES NEW_LINES  
+1     aa1.txt                   5            2            4           
+2     ccdc_ssm.chh              5            0            0           
+3     ccdc_ssm.mpch             29586        0            0           
+4     cc_data_collector.mpch    21190        0            0           
+5     cc_results_hdlr.mpch      20650        0            0           
+6     central_alerter.chh       50           0            0           
+
+Summary
+INDEX FILE_NAME                TOTAL_LINES CHANGE_LINES NEW_LINES  
+1     aa1.txt                   5            2            4           
+2     ccdc_ssm.chh              5            0            0           
+3     ccdc_ssm.mpch             29586        0            0           
+4     cc_data_collector.mpch    21190        0            0           
+5     cc_results_hdlr.mpch      20650        0            0           
+6     central_alerter.chh       50           0            0           
+
+Summary
+INDEX FILE_NAME                TOTAL_LINES CHANGE_LINES NEW_LINES  
+1     aa1.txt                   5            2            4           
+
+Summary
+INDEX FILE_NAME                TOTAL_LINES CHANGE_LINES NEW_LINES  
+1     aa1.txt                   5            2            4           
+2     ccdc_ssm.chh              5            0            0           
+3     ccdc_ssm.mpch             29586        0            0           
+4     cc_data_collector.mpch    21190        0            0           
+5     cc_results_hdlr.mpch      20650        0            0           
+6     central_alerter.chh       50           0            0           
+
+Summary
+INDEX FILE_NAME                TOTAL_LINES CHANGE_LINES NEW_LINES  
+1     aa1.txt                   5            2            4           
+2     ccdc_ssm.chh              5            0            0           
+3     ccdc_ssm.mpch             29586        0            0           
+4     cc_data_collector.mpch    21190        0            0           
+5     cc_results_hdlr.mpch      20650        0            0           
+6     central_alerter.chh       50           0            0           
+
+Summary
+INDEX FILE_NAME                TOTAL_LINES CHANGE_LINES NEW_LINES  
+1     aa1.txt                   5            2            0           
+2     ccdc_ssm.chh              5            0            0           
+3     ccdc_ssm.mpch             29586        0            0           
+4     cc_data_collector.mpch    21190        0            0           
+5     cc_results_hdlr.mpch      20650        0            0           
+6     central_alerter.chh       50           0            0           
+
+Summary
+INDEX FILE_NAME                TOTAL_LINES CHANGE_LINES NEW_LINES  
+1     aa1.txt                   5            2            4           
+2     ccdc_ssm.chh              5            0            0           
+3     ccdc_ssm.mpch             29586        0            0           
+4     cc_data_collector.mpch    21190        0            0           
+5     cc_results_hdlr.mpch      20650        0            0           
+6     central_alerter.chh       50           0            0           
+All the files sumed total lines = 71486
+
+Summary
+INDEX FILE_NAME                TOTAL_LINES CHANGE_LINES NEW_LINES  
+All the files sumed total lines = 0
+
+Summary
+INDEX FILE_NAME                TOTAL_LINES CHANGE_LINES NEW_LINES  
+1     aa1.txt                   5            2            4           
+2     cc_data_collector.mpch    21190        0            0           
+All the files sumed total lines = 21195
+
+Summary
+INDEX FILE_NAME                TOTAL_LINES CHANGE_LINES NEW_LINES  
+1     aa1.txt                   5            2            4           
+2     cc_data_collector.mpch    21190        0            0           
+All the files sumed total lines = 21195
+
+Summary
+INDEX FILE_NAME                TOTAL_LINES CHANGE_LINES NEW_LINES  
+1     aa1.txt                   5            2            4           
+2     cc_data_collector.mpch    21190        0            0           
+All the files sumed total lines = 21195
+1     error.rtrc_backup         550407       0            0           
+2     error.rtrc_backup.out.err 5831         0            0           
+3     good.rtrc_backup          548294       0            0           
+
+Summary
+1     FW  1-6933291 - telecom outage after TP1 failure (also SSW1 down) - GanSu CMCC (B12 2ED02QDO2).msg 23145        0            0           
+2     20151201_064052_20151201_064100_1.3.6_SCPR_[1]_1012.rtrc_backup 547878       0            0           
+3     20151201_064052_20151201_064100_1.3.6_SCPR_[1]_1012.rtrc_backup.out 139650       0            0           
+4     20151201_064100_20151201_064101_1.3.6_SCPR_[1]_1012.rtrc_backup 530944       0            0           
+5     20151201_064100_20151201_064101_1.3.6_SCPR_[1]_1012.rtrc_backup.out 130193       0            0           
+6     20151201_064101_20151201_064109_1.3.6_SCPR_[1]_1012.rtrc_backup 538459       0            0           
+7     20151201_064101_20151201_064109_1.3.6_SCPR_[1]_1012.rtrc_backup.out 129073       0            0           
+8     20151201_064111_20151201_064112_1.3.6_SCPR_[1]_1012.rtrc_backup 548294       0            0           
+9     20151201_064111_20151201_064112_1.3.6_SCPR_[1]_1012.rtrc_backup.out 119697       0            0           
+10    SCPR_20151201064000_20151201071259_files.tar.gz 21196        0            0           
+11    SLA2.4_Setup.exe          142267       0            0           
+12    SLA_Demo.pptx             19323        0            0           
+13    error.rtrc_backup         550407       0            0           
+14    error.rtrc_backup.out.err 5831         0            0           
+15    good.rtrc_backup          548294       0            0           
+
+Summary
+
+Summary
+INDEX FILE_NAME                                    TOTAL_LINES CHANGE_LINES NEW_LINES  
+1     ccdc_ssm.chh                                  5            0            0           
+2     ccdc_ssm.mpch                                 29586        0            0           
+3     cc_data_collector.mpch                        21190        0            0           
+4     cc_results_hdlr.mpch                          20650        0            0           
+5     central_alerter.chh                           50           0            0           
+6     error.rtrc_backup                             550407       0            0           
+7     error.rtrc_backup.out.err                     5831         0            0           
+8     good.rtrc_backup                              548294       0            0           
+
+Summary
+INDEX FILE_NAME                                                        TOTAL_LINES CHANGE_LINES NEW_LINES  
+1     compare_DN.docx                                                   648          0            0           
+2     error.rtrc_backup                                                 550407       0            0           
+3     error.rtrc_backup.out.err                                         5831         0            0           
+4     good.rtrc_backup                                                  548294       0            0           
+
+Summary
+INDEX FILE_NAME                                                        TOTAL_LINES CHANGE_LINES NEW_LINES  
+1     Chat.txt                                                          57           0            0           
+
+Summary
+INDEX FILE_NAME                                                        TOTAL_LINES CHANGE_LINES NEW_LINES  
+1     aa1.txt                                                           8            6            0           
+2     cc_data_collector.mpch                                            21190        0            0           
+3     ccdc_ssm.chh                                                      5            0            0           
+4     ccdc_ssm.mpch                                                     29586        0            0           
+5     cc_data_collector.mpch                                            21190        0            0           
+6     cc_results_hdlr.mpch                                              20650        0            0           
+7     central_alerter.chh                                               50           0            0           
+
+Summary
+INDEX FILE_NAME                                                        TOTAL_LINES CHANGE_LINES NEW_LINES  
+1     error.rtrc_backup                                                 550407       0            0           
+2     error.rtrc_backup.out.err                                         5831         0            0           
+3     good.rtrc_backup                                                  548294       0            0           
+
+Summary
+INDEX FILE_NAME                                                        TOTAL_LINES CHANGE_LINES NEW_LINES  
+1     error.rtrc_backup                                                 550407       0            0           
+2     error.rtrc_backup.out.err                                         5831         0            0           
+3     good.rtrc_backup                                                  548294       0            0           
+
+Summary
+INDEX FILE_NAME                                                        TOTAL_LINES CHANGE_LINES NEW_LINES  
+1     result.txt                                                        152          0            0           
+
+Summary
+INDEX FILE_NAME                                                        TOTAL_LINES CHANGE_LINES NEW_LINES  
+1     readme.txt                                                        12           0            0           
+
+Summary
+INDEX FILE_NAME                                                        TOTAL_LINES CHANGE_LINES NEW_LINES  
+1     readme.txt                                                        12           0            0           
