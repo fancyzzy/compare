@@ -35,6 +35,14 @@ def get_file_list(dir,file_list):
 
 	return file_list
 
+
+def file_line(file_name):
+    with open(file_name) as f:
+    	#for non-blank lines counting
+        lengths = [len(line) for line in (line.rstrip() for line in f.readlines()) if line]
+    return len(lengths)
+
+
 def compare_single(base_file_path, latest_file_path):
 	#count only non whitespace lines
 	#lines_cmd = ['wc','-l',base_file_path]
@@ -42,6 +50,8 @@ def compare_single(base_file_path, latest_file_path):
 	change_line = ''
 	new_line = ''
 
+	#use python native function to count file lines
+	'''
 	lines_cmd = ['grep','-c','-P',"'\S'",base_file_path]
 	p2 = subprocess.Popen(lines_cmd,stdin=subprocess.PIPE, stdout=subprocess.PIPE,\
 	stderr=subprocess.PIPE, shell=False)
@@ -52,6 +62,10 @@ def compare_single(base_file_path, latest_file_path):
 		print("p2 error encounted: ",err)
 	else:
 		total_line = out.decode('utf-8').strip().strip('\n').split(' ')[0]
+	'''
+	total_line = file_line(base_file_path)
+
+
 
 	cmd = ['diff','-B',base_file_path,latest_file_path]
 	p1 = subprocess.Popen(cmd,stdin=subprocess.PIPE, stdout=subprocess.PIPE,\
@@ -82,11 +96,6 @@ def compare_single(base_file_path, latest_file_path):
 	return each_result
 
 
-def file_line(file_name):
-    with open(file_name) as f:
-    	#for non-blank lines counting
-        lengths = [len(line) for line in (line.rstrip() for line in f.readlines()) if line]
-    return len(lengths)
 
 def compare(base,latest):
 
@@ -112,6 +121,7 @@ def compare(base,latest):
 		print("{0}.{1}".format(i,base_file_path))
 		err =''
 
+		#Use python native function to count the file lines
 		'''	
 		#count only non whitespace lines
 		#lines_cmd = ['wc','-l',base_file_path]
@@ -130,7 +140,6 @@ def compare(base,latest):
 			#each_result.append(total_line)
 			#print "finished total line = ",total_line
 		'''
-
 		total_line = file_line(base_file_path)
 
 		cmd = ['diff','-B',base_file_path,latest_file_path]
