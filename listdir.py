@@ -2,8 +2,9 @@
 # --*-- coding:utf-8 --*--
 #author Felix, fancyzzy@163.com
 
-from Tkinter import *
-import tkMessageBox 
+from tkinter import *
+#import tkMessageBox 
+import tkinter.messagebox
 import dnd
 import os
 import compare
@@ -119,7 +120,9 @@ class DirList(object):
 			base_file_name = os.path.basename(base_file_path)
 			i+=1
 			print("{0}.{1}".format(i,base_file_path))
-			if d_latest.has_key(base_file_name):
+			#Python3 no has_key()
+			#if d_latest.has_key(base_file_name):
+			if base_file_name in d_latest:
 				single_re = compare.compare_single(base_file_path, d_latest.get(base_file_name))
 			else:
 				#latest files not include the base file, just compare itself to get the total line
@@ -130,7 +133,7 @@ class DirList(object):
 
 		#print("DEBUG result=",result)
 		self.show_result(result)
-		tkMessageBox.showinfo(title='Diff Result', message="Diff result has been saved in 'result.txt'.")
+		tkinter.messagebox.showinfo(title='Diff Result', message="Diff result has been saved in 'result.txt'.")
 
 
 	###############Drag and Drop feature:########################

@@ -1,6 +1,6 @@
 import os
 import sys
-from Tkinter import *
+from tkinter import *
 #from tkinter import *
 import dnd
 #s = r"C:\Users\tarzonz\Desktop\sla_new\tkdnd2.7"

@@ -48,7 +48,7 @@ def compare_single(base_file_path, latest_file_path):
 	p2.wait()
 	out = p2.stdout.read()
 	err = p2.stderr.read()
-	if err != '' and not err.startswith('cygwin warning') and err != b'':
+	if err != '' and not err.startswith(b'cygwin warning') and err != b'':
 		print("p2 error encounted: ",err)
 	else:
 		total_line = out.decode('utf-8').strip().strip('\n').split(' ')[0]
@@ -58,7 +58,7 @@ def compare_single(base_file_path, latest_file_path):
 	stderr=subprocess.PIPE, shell=False)
 	out,err = p1.communicate('')
 	out  = str(out)
-	if err != '' and not err.startswith('cygwin warning') and err != b'':
+	if err != '' and not err.startswith(b'cygwin warning') and err != b'':
 		print("p1 error encounted:",err)
 	else:
 		change_line = str(out.count('<'))
@@ -81,6 +81,12 @@ def compare_single(base_file_path, latest_file_path):
 	each_result = EACH_ITEM(os.path.basename(base_file_path), total_line, change_line, new_line)
 	return each_result
 
+
+def file_line(file_name):
+    with open(file_name) as f:
+    	#for non-blank lines counting
+        lengths = [len(line) for line in (line.rstrip() for line in f.readlines()) if line]
+    return len(lengths)
 
 def compare(base,latest):
 
@@ -106,6 +112,7 @@ def compare(base,latest):
 		print("{0}.{1}".format(i,base_file_path))
 		err =''
 
+		'''	
 		#count only non whitespace lines
 		#lines_cmd = ['wc','-l',base_file_path]
 		lines_cmd = ['grep','-c','-P',"'\S'",base_file_path]
@@ -122,7 +129,9 @@ def compare(base,latest):
 			total_line = out.decode('utf-8').strip().strip('\n').split(' ')[0]
 			#each_result.append(total_line)
 			#print "finished total line = ",total_line
+		'''
 
+		total_line = file_line(base_file_path)
 
 		cmd = ['diff','-B',base_file_path,latest_file_path]
 		p1 = subprocess.Popen(cmd,stdin=subprocess.PIPE, stdout=subprocess.PIPE,\
@@ -181,7 +190,7 @@ if __name__ == '__main__':
 	printl("")
 	s = "Summary"
 	printl(s)
-	s = "%-5s"%("INDEX") + "%-25s"%(" FILE_NAME") + "%-12s"%(" TOTAL_LINES") + "%-12s"%(" CHANGE_LINES")\
+	s = "%-5s"%("INDEX") + "%-30s"%(" FILE_NAME") + "%-12s"%(" TOTAL_LINES") + "%-12s"%(" CHANGE_LINES")\
 	+ "%-12s"%(" NEW_LINES")
 	printl(s)
 
@@ -199,7 +208,7 @@ if __name__ == '__main__':
 	for item in re:
 		s = ''
 		index +=1
-		s = "%-5s"%(str(index)) + " %-25s"%(item.FILE_NAME) + " %-12s"%(item.TOTAL_LINES) + \
+		s = "%-5s"%(str(index)) + " %-30s"%(item.FILE_NAME) + " %-12s"%(item.TOTAL_LINES) + \
 		" %-12s"%(item.CHANGE_LINES) + " %-12s"%(item.NEW_LINES) 
 		printl(s)
 		all_total_line += int(item.TOTAL_LINES)
