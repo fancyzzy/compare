@@ -1,0 +1,59 @@
+NEWMODE ZM_CELL_STS_RSTR_ARY    =                                               
+  ARRAY (1 : CM_FY32_MAX_CELLS_PER_BSC) ZM_CELL_STS_RSTR_ELE;                   
+NEWMODE ZM_CELL_STS_RSTR_ELE = STRUCT                                           
+  (                                                                             
+   B_DEFERD_CELL_STS M_BYTE,                                                    
+   B_LOWEST_CELL_STS M_BYTE,                                                    
+   B_CURRNT_CELL_STS M_BYTE,                                                    
+   B_ALRTR1_RSTR_IND BIN(1) PACK,                                               
+   B_ALRTR3_RSTR_IND BIN(1) PACK,                                               
+   B_ALRTR4_RSTR_IND BIN(1) PACK,                                               
+                                                                                
+   /* THE FOLLOWING THREE BOOLEAN INDICATORS ARE USED TO */                     
+   /* REMEMBER FOR CELL STATUS REPORT PURPOSES THAT THE  */                     
+   /* RELEVANT ALERTER IS STILL EFFECTIVELY SUSPENDED    */                     
+   /* WHEN THE ALERTER GOES TO ACTIVE DURING THE         */                     
+   /* HOUSEKEEPING PERIOD READY FOR THE NEXT PM PERIOD.  */                     
+   /* IF THE INDICATOR IS SET THEN IT SHOWS THAT THE     */                     
+   /* ALERTER IS STILL SUSPENDED AND IT IS ABOUT TO      */                     
+   /* RE-ARM ON THE START OF THE NEXT PM PERIOD.         */                     
+                                                                                
+   B_ALRTR1_SUSP_IND BIN(1) PACK,                                               
+   B_ALRTR3_SUSP_IND BIN(1) PACK,                                               
+   B_ALRTR4_SUSP_IND BIN(1) PACK,                                               
+                                                                                
+   B_ALRTR1_MULTI_ALARM BIN(1) PACK,                                            
+   B_ALRTR3_MULTI_ALARM BIN(1) PACK,                                            
+   B_ALRTR4_MULTI_ALARM BIN(1) PACK                                             
+                                                                                
+   /* MULTI_ALARM BIT IS SET WHEN A CELL ALERTER IS SUSPENDED  */               
+   /* AFTER THE FIRST SET OF ALARM HAS BEEN SENT. IT INDICATES */               
+   /* THAT SUBSEQUENT ALARMS FOR THE SAME CELL ALERTER         */               
+   /* BELONGING TO THE SAME PM POLLING PERIOD BUT COMING FROM  */               
+   /* OTHER TCUS CAN BE PASSED ON TO THE OMC. IT IS RESET TO 0 */               
+   /* WHEN THE ALERTER HOUSEKEEPING TIMER EXPIRES.             */               
+                                                                                
+  );                                                                            
+                                                                                
+SYNMODE ZM_ACTN_TYP             = SET (                                         
+                                       ZE_DO_NOTHING,                           
+                                       ZE_ACTIVATE_ALERTER,                     
+                                       ZE_DEACTIVATE_ALERTER,                   
+                                       ZE_MODIFY_ALERTER                        
+                                      );                                        
+                                                                                
+SYNMODE ZM_OMC_R_ACTN_BUF = STRUCT                                              
+  (                                                                             
+   B_ACTN_TYP         ZM_ACTN_TYP,                                              
+   B_ALRTR_TYP        M_ALERTER_TYPE,                                           
+   B_ALRTR_VALID      ARRAY (1:4) BOOL,                                         
+   B_ALRTR_THRSHOLD_1 M_THRESHOLD_VALUE,                                        
+   B_ALRTR_THRSHOLD_2 M_THRESHOLD_VALUE,                                        
+   B_ALRTR_OBS_PER    M_OBSERV_PERIOD,                                          
+   B_ALRTR_REARM_TMR  M_REARMING_TIMER,                                         
+   B_NR_OF_CELLS      INT,                                                      
+   B_CELL_IDX_ARY     ARRAY (1 :                                                
+             CM_FY32_MAX_CELLS_PER_BSC) M_CELL_IDX                              
+  );                                                                            
+                                                                                
+  
