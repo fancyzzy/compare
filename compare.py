@@ -5,6 +5,7 @@ import os
 import subprocess
 import re
 import collections
+import difflib
 
 EACH_ITEM = collections.namedtuple('EACH_ITEM','FILE_NAME TOTAL_LINES CHANGE_LINES NEW_LINES')
 
@@ -42,6 +43,23 @@ def file_line(file_name):
         lengths = [len(line) for line in (line.rstrip() for line in f.readlines()) if line]
     return len(lengths)
 
+def diff_file(file_a,file_b):
+
+	change_line = 0
+	with open(file_a,'r') as A:
+		with open(file_b, 'r') as B:
+			diff = difflib.unified_diff(A.readlines(), B.readlines(),\
+				fromfile='file_a', tofile='file_b')
+
+			for line in diff:
+				if '-' == line[0]:
+					change_line += 1
+				#print(line, end='')
+	if change_line != 0:
+		return change_line - 1
+	else:
+		return 0
+
 
 def compare_single(base_file_path, latest_file_path):
 	#count only non whitespace lines
@@ -51,47 +69,12 @@ def compare_single(base_file_path, latest_file_path):
 	new_line = ''
 
 	#use python native function to count file lines
-	'''
-	lines_cmd = ['grep','-c','-P',"'\S'",base_file_path]
-	p2 = subprocess.Popen(lines_cmd,stdin=subprocess.PIPE, stdout=subprocess.PIPE,\
-	stderr=subprocess.PIPE, shell=False)
-	p2.wait()
-	out = p2.stdout.read()
-	err = p2.stderr.read()
-	if err != '' and not err.startswith(b'cygwin warning') and err != b'':
-		print("p2 error encounted: ",err)
-	else:
-		total_line = out.decode('utf-8').strip().strip('\n').split(' ')[0]
-	'''
 	total_line = file_line(base_file_path)
+	if os.path.exists(latest_file_path):
+		total_line_new = file_line(latest_file_path)
+		change_line = diff_file(base_file_path, latest_file_path)
+		new_line = total_line_new - total_line
 
-
-
-	cmd = ['diff','-B',base_file_path,latest_file_path]
-	p1 = subprocess.Popen(cmd,stdin=subprocess.PIPE, stdout=subprocess.PIPE,\
-	stderr=subprocess.PIPE, shell=False)
-	out,err = p1.communicate('')
-	out  = str(out)
-	if err != '' and not err.startswith(b'cygwin warning') and err != b'':
-		print("p1 error encounted:",err)
-	else:
-		change_line = str(out.count('<'))
-		#count the new line by z-y +1 from 'xay,z' diff result
-		rule = r'^\d+a\d+,?[\d]*'
-		comp = re.compile(rule)
-		new_line = 0
-		for line in out.split('\n'):
-			res = comp.findall(line)
-			if len(res) == 1:
-				r = res[0].split('a')
-				if len(r) == 2:
-					rr = r[1].split(',')
-					if len(rr) == 2:
-						new_line += int(rr[1])-int(rr[0])+1
-					elif len(rr) == 1:
-						new_line += 1
-					else:
-						pass
 	each_result = EACH_ITEM(os.path.basename(base_file_path), total_line, change_line, new_line)
 	return each_result
 
@@ -121,7 +104,7 @@ def compare(base,latest):
 		print("{0}.{1}".format(i,base_file_path))
 		err =''
 
-		#Use python native function to count the file lines
+		#Use python native function to count and diff the file lines
 		'''	
 		#count only non whitespace lines
 		#lines_cmd = ['wc','-l',base_file_path]
@@ -142,6 +125,12 @@ def compare(base,latest):
 		'''
 		total_line = file_line(base_file_path)
 
+		if os.path.exists(latest_file_path):
+			total_line_new = file_line(latest_file_path)
+			change_line = diff_file(base_file_path, latest_file_path)
+			new_line = total_line_new - total_line
+
+		'''
 		cmd = ['diff','-B',base_file_path,latest_file_path]
 		p1 = subprocess.Popen(cmd,stdin=subprocess.PIPE, stdout=subprocess.PIPE,\
 		stderr=subprocess.PIPE, shell=False)
@@ -151,6 +140,8 @@ def compare(base,latest):
 
 		if err != '' and err != b'':
 			print("p1 error encounted:",err)
+			each_result = EACH_ITEM(file_name, total_line, change_line, new_line)
+			result.append(each_result)	
 			continue
 		else:
 			#out = p1.stdout.readline(100)
@@ -175,6 +166,7 @@ def compare(base,latest):
 							pass
 			#each_result.append(new_line)
 			#feature1: newlines counting end
+			'''
 
 		each_result = EACH_ITEM(file_name, total_line, change_line, new_line)
 		result.append(each_result)	

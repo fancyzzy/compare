@@ -8,6 +8,7 @@ import tkinter.messagebox
 import dnd
 import os
 import compare
+import tooltip
 
 MY_COLOR_BLUE = '#%02x%02x%02x' % (51,153,255)
 MY_COLOR_BLUE_OFFICE ='#%02x%02x%02x' % (43,87,154) 
@@ -16,7 +17,7 @@ MY_COLOR_GREEN = '#%02x%02x%02x' % (192,233,17)
 class DirList(object):
 	def __init__(self, initdir=None):
 		self.top = Tk()
-		self.top.geometry('500x520+200+180')
+		self.top.geometry('560x520+200+180')
 		self.top.wm_title("VC2.0")
 
 		Label(self.top, text='').pack()
@@ -44,6 +45,9 @@ class DirList(object):
 		#in the listbox into the windows clipboard when =1
 		self.listbox_base = Listbox(fm_listbox_base, height=20, width=34, selectmode=BROWSE,\
 			exportselection=1,listvariable=self.list_base_v)
+
+		s = "Drag & Drop folders that you want to count lines and make diffs"
+		tooltip.ToolTip(self.listbox_base, msg=None, msgFunc=lambda : s, follow=True, delay=0.2)
 		'''
 		self.listbox_base['yscrollcommand'] = self.listbox_baseby.set
 		self.listbox_baseby.config(command=self.listbox_base.yview)
